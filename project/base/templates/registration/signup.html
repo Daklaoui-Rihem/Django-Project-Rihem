@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<body>
+<div class="card1">
+    <form method="POST">
+        <h3>SIGNUP</h3>
+        {% csrf_token %}
+        {{form}}
+        <p class="msg">Already have an account <a href="/login">Login</a></p>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+</body>

@@ -1,0 +1,118 @@
+
+
+.helptext
+{
+    display: none;
+}
+
+.errorlist li {
+    color: red; /* Optional: Change the color of error messages */
+    list-style-type: none;
+}
+
+body{
+    margin: 10%;
+    align-items: center;
+    background: linear-gradient(to bottom, #000000, #00003b);
+}
+
+.card{
+    height: 330px;
+    width: 350px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 150px;
+    margin-left: 300px;
+    padding: 10px;
+    padding-top: 1px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(108, 108, 108, 0.284);
+}
+
+label{
+    margin: 72px;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+input{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 72px;
+    display: block;
+    height: 23px;
+    border-radius: 10px;
+    height: 27px;
+    width: 210px;
+}
+
+button {
+    background-color: #000;
+    color: white;
+    padding: 10px 35px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 122px;
+    margin-top: 8px;
+    font-family: sans-serif;
+    transition-duration: 0.2s;
+}
+
+button:hover {
+    background: transparent;
+    outline: none;
+    box-shadow: 0 0 5px #000;
+}
+
+button:focus {
+    padding: 9px 34px;
+    margin-left: 123px;
+    font-size: smaller;
+}
+
+h3{
+    color: white;
+    font-family: sans-serif;
+    margin-left: 141px;
+    font-size: 25px;
+}
+
+.msg{
+    font-size: x-small;
+    margin-left: 200px;
+    color: grey;
+}
+
+a{
+    color: grey;
+}
+
+
+.card1{
+    height: 525px;
+    width: 350px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 150px;
+    margin-left: 300px;
+    padding: 10px;
+    padding-top: 1px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(108, 108, 108, 0.284);
+}
+
+.btn{
+    margin-left: 122px;
+    margin-top: 50px;
+}
+
