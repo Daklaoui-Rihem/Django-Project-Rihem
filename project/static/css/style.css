@@ -6,7 +6,7 @@
 }
 
 .errorlist li {
-    color: red; /* Optional: Change the color of error messages */
+    color: red;
     list-style-type: none;
 }
 

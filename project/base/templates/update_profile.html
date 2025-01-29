@@ -1,0 +1,41 @@
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<body class="bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans">
+    <div class="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-2xl shadow-2xl p-16 w-full max-w-md transition-all duration-300 transform hover:scale-105">
+        <h2 class="text-3xl font-bold text-white text-center mb-6">Update Your Profile</h2>
+
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+                <div class="relative">
+                    <input 
+                        id="id_username"
+                        name="username"
+                        type="text"
+                        class="w-full p-3 text-gray-200 bg-gray-700 border border-gray-600 rounded-lg shadow-inner focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition duration-200"
+                        placeholder="Enter your username"
+                        value="{{ form.username.value|default_if_none:'' }}"
+                    >
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 bg-blue-700 text-white font-medium text-lg rounded-lg shadow-lg transition duration-200 hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Save Changes
+            </button>
+        </form>
+
+        <a href="/profile/" class="block text-center mt-5 text-sm text-gray-400 hover:text-white transition duration-200">
+            ← Cancel & Return
+        </a>
+    </div>
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>

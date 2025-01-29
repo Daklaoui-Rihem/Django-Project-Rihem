@@ -1,0 +1,40 @@
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<body class="bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans">
+    <div class="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-2xl shadow-2xl p-16 w-[500px] sm:w-[600px] transition-all duration-300 transform hover:scale-105">
+        <h1 class="text-5xl font-bold text-white text-center mb-4">
+           Your Account
+        </h1>
+
+        <h2 class="text-xl font-semibold text-gray-300 text-center mb-8">
+            Welcome, <span class="text-gradient bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-white">{{user.username}}</span>
+        </h2>
+
+        <div class="flex justify-between mt-6 space-x-2">
+            <button class="flex-1 py-2 px-3 border border-green-600 text-green-600 bg-transparent font-medium rounded-lg shadow-md text-sm hover:bg-green-600 hover:text-white transition duration-300">
+                <a href="/profile/update/">Update</a>
+            </button>
+            
+            <button class="flex-1 py-2 px-3 border border-red-600 text-red-600 bg-transparent font-medium rounded-lg shadow-md text-sm hover:bg-red-600 hover:text-white transition duration-300">
+                <a href="/profile/delete/">Delete</a>
+            </button>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button class="py-2 px-4 border border-blue-600 text-blue-600 bg-transparent font-medium rounded-full shadow-md text-sm hover:bg-blue-600 hover:text-white transition duration-300">
+                <a href="/logout/">Logout</a>
+            </button>
+            <button class="py-2 px-4 border border-black-600 text-black-600 bg-transparent font-medium rounded-full shadow-md text-sm hover:bg-black-600 hover:text-white transition duration-300">
+                <a href="/orders/">Go Back</a>
+            </button>
+        </div>
+    </div>
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>

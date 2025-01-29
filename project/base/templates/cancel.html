@@ -1,0 +1,22 @@
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<title>Transaction Canceled</title>
+<body class="bg-gray-800 text-white flex items-center justify-center min-h-screen p-6 font-sans">
+    <div class="relative p-10 bg-gradient-to-br from-purple-900 to-black rounded-2xl shadow-2xl w-full max-w-md transition-all duration-300 transform hover:scale-105">
+        <h1 class="text-4xl font-extrabold text-white text-center">Transaction Canceled!</h1>
+        <p class="mt-4 text-lg text-gray-300 text-center">We regret to inform you that your transaction has been canceled.</p>
+        <div class="mt-8 flex justify-center">
+            <button type="button" class="relative inline-flex items-center justify-center px-6 py-3 text-white font-semibold bg-red-500 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                <span class="absolute inset-0 rounded-lg bg-red-700 blur-lg opacity-75"></span>
+                <a href="/orders/" class="relative">Go to Orders page</a>
+            </button>
+        </div>
+    </div>
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>

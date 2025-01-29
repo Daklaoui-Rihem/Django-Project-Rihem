@@ -1,0 +1,120 @@
+{% include 'navbar.html' %}
+
+{% block content %}
+<title>Orders</title>
+<style>
+    @keyframes fadeScale {
+        0% { opacity: 0; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glow {
+        0%, 100% { box-shadow: 0 0 5px rgba(167, 139, 250, 0.1); }
+        50% { box-shadow: 0 0 20px rgba(167, 139, 250, 0.3); }
+    }
+
+    .card-enter {
+        animation: fadeScale 0.6s ease-out;
+    }
+
+    .float-animation {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .glow-effect {
+        animation: glow 3s ease-in-out infinite;
+    }
+
+    .gradient-text {
+        background: linear-gradient(90deg, #a78bfa, #ec4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+</style>
+
+<div class="bg-gradient-to-br from-slate-950 via-blue-950 to-gray-950 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8 float-animation">
+            <h1 class="text-4xl font-bold gradient-text">
+                Order History
+            </h1>
+            <span class="text-gray-400">Total Orders: 
+                <span class="text-purple-400 font-bold hover:text-pink-400 transition-colors duration-300">
+                    {{ orders|length }}
+                </span>
+            </span>
+        </div>
+
+        {% if orders %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for o in orders %}
+            <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
+                <div class="p-6 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 transform group-hover:scale-110 transition-transform duration-700"></div>
+                    
+                    <div class="relative">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-2 transform group-hover:scale-105 transition-transform duration-300">
+                                <div class="w-3 h-3 rounded-full 
+                                    {% if o.purchased_plan == 'Bronze' %}bg-amber-700
+                                    {% elif o.purchased_plan == 'Silver' %}bg-gray-400
+                                    {% elif o.purchased_plan == 'Gold' %}bg-yellow-500
+                                    {% elif o.purchased_plan == 'Platinum' %}bg-purple-500{% endif %}">
+                                </div>
+                                <span class="text-lg font-semibold text-white">{{ o.purchased_plan }}</span>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium transform hover:scale-105 transition-transform duration-300
+                                {% if o.status == 'Completed' %}bg-green-500/10 text-green-400
+                                {% elif o.status == 'Pending' %}bg-yellow-500/10 text-yellow-400
+                                {% else %}bg-red-500/10 text-red-400{% endif %}">
+                                {{ o.status }}
+                            </span>
+                        </div>
+
+                        <div class="mb-4 transform group-hover:translate-x-2 transition-transform duration-300">
+                            <span class="text-2xl font-bold text-white">${{ o.cost }}</span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="text-xs text-gray-500 block mb-1">Transaction ID</label>
+                            <div class="font-mono text-sm text-gray-400 bg-gray-800/50 rounded-lg px-3 py-2 group-hover:bg-gray-800/70 transition-colors duration-300">
+                                {{ o.stripe_transaction_id|slice:":-6" }}...
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">{{ o.payment }}</span>
+                        </div>
+
+                        <div class="text-gray-500 text-sm transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                            {{ o.datetime|date:"M d, Y H:i" }}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="card-enter bg-gray-900/70 backdrop-blur-sm border border-gray-800 rounded-xl p-12 text-center">
+            <h2 class="text-white text-2xl font-bold mb-2 gradient-text">No Orders Yet</h2>
+            <p class="text-gray-400 mb-8">Start exploring our subscription plans to begin your journey.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

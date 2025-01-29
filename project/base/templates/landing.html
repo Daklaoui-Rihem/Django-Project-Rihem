@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        .bounce-slow {
+            animation: bounce 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen">
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <!-- Content Container with Backdrop Blur and Bounce -->
+        <div class="bounce-slow max-w-xl w-full bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl border border-pink-500/20">
+            <!-- Content Wrapper -->
+            <div class="flex flex-col items-center space-y-8 text-center">
+                <!-- Heading -->
+                <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
+                    Welcome to Our Website!
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="text-gray-400 text-lg md:text-xl max-w-md">
+                    Experience the next generation of digital innovation
+                </p>
+                
+                <!-- Button Container -->
+                <div class="relative group">
+                    <!-- Button Glow Effect -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-200"></div>
+                    
+                    <!-- Button -->
+                    <button class="relative px-8 py-4 bg-gray-900 text-white rounded-lg transform transition duration-200 ease-in-out hover:-translate-y-1 hover:bg-gray-800 flex items-center space-x-2 group border border-pink-500/30">
+                        <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-purple-200">
+                            <a href="/dashboard/">Get Started</a>
+                        </span>
+                        <svg class="w-5 h-5 text-pink-400 transform group-hover:translate-x-1 transition-transform duration-200" 
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+[
+    {"name": "Bronze", "apps": 3, "duration": 12, "currency": "usd", "price": 100},
+    {"name": "Silver", "apps": 9, "duration": 12, "currency": "usd", "price": 250},
+    {"name": "Gold", "apps": 12, "duration": 12, "currency": "usd", "price": 300},
+    {"name": "Platinium", "apps": 15, "duration": 12, "currency": "usd", "price": 330}
+]
