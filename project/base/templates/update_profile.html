@@ -1,34 +1,53 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<body class="bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans">
-    <div class="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-2xl shadow-2xl p-16 w-full max-w-md transition-all duration-300 transform hover:scale-105">
-        <h2 class="text-3xl font-bold text-white text-center mb-6">Update Your Profile</h2>
+<body class="bg-black text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans">
+    <!-- Animated stars background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 10%; left: 20%"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 30%; left: 70%"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 60%; left: 40%"></div>
+        <div class="absolute w-2 h-2 bg-yellow-200 rounded-full animate-ping" style="top: 80%; left: 85%"></div>
+        <div class="absolute w-2 h-2 bg-blue-200 rounded-full animate-ping" style="top: 15%; left: 55%"></div>
+    </div>
 
-        <form method="POST" class="space-y-6">
-            {% csrf_token %}
+    <!-- Planet decorations -->
+    <div class="absolute top-0 left-0 w-64 h-64 rounded-full bg-gradient-to-br from-purple-900 to-indigo-900 opacity-30 blur-xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-gradient-to-tl from-blue-900 to-cyan-900 opacity-20 blur-xl animate-pulse"></div>
 
-            <div>
-                <label for="id_username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
-                <div class="relative">
-                    <input 
-                        id="id_username"
-                        name="username"
-                        type="text"
-                        class="w-full p-3 text-gray-200 bg-gray-700 border border-gray-600 rounded-lg shadow-inner focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition duration-200"
-                        placeholder="Enter your username"
-                        value="{{ form.username.value|default_if_none:'' }}"
-                    >
+    <div class="relative bg-gradient-to-br from-gray-900 via-gray-900 to-black rounded-2xl shadow-2xl p-16 w-full max-w-md transition-all duration-500 transform hover:scale-105 border border-gray-800 hover:border-blue-500/30 group">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div class="relative">
+            <h2 class="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Update Your Profile
+            </h2>
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div>
+                    <label for="id_username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <div class="relative">
+                        <input 
+                            id="id_username"
+                            name="username"
+                            type="text"
+                            class="w-full p-3 text-gray-200 bg-gray-800/50 border border-gray-700 rounded-xl shadow-inner focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:outline-none transition duration-300 backdrop-blur-sm hover:border-blue-500/30"
+                            placeholder="Enter your username"
+                            value="{{ form.username.value|default_if_none:'' }}"
+                        >
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" class="w-full py-3 px-4 bg-blue-700 text-white font-medium text-lg rounded-lg shadow-lg transition duration-200 hover:bg-blue-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Save Changes
-            </button>
-        </form>
+                <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-lg rounded-xl shadow-lg transition duration-300 hover:from-blue-500 hover:to-purple-500 hover:shadow-blue-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Save Changes
+                </button>
+            </form>
 
-        <a href="/profile/" class="block text-center mt-5 text-sm text-gray-400 hover:text-white transition duration-200">
-            ← Cancel & Return
-        </a>
+            <a href="/profile/" class="block text-center mt-5 text-sm text-gray-400 hover:text-blue-400 transition duration-300">
+                ← Cancel & Return
+            </a>
+        </div>
     </div>
 </body>
 

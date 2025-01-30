@@ -58,7 +58,9 @@ def create_checkout_session(request):
 
 
 def success(request):
-    return render(request, "success.html")
+    user = request.user
+    subscription = Subscription.objects.filter(user=user).order_by('-datetime').first()
+    return render(request, "success.html", {"subscription": subscription})
 
 def cancel(request):
     return render(request, "cancel.html")

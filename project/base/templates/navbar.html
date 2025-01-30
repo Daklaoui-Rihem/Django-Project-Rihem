@@ -1,12 +1,60 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<header class="w-full p-6 bg-gray-900 border-b border-gray-700 shadow-xl">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-white text-3xl font-bold tracking-tight">Purchased Plans</h1>
-    <nav class="flex space-x-6">
-      <a href="/" class="text-gray-300 hover:text-white transition duration-300 ease-in-out font-medium">Home</a>
-      <a href="/dashboard/" class="text-gray-300 hover:text-white transition duration-300 ease-in-out font-medium">Pricings</a>
-      <a href="/profile/" class="text-gray-300 hover:text-white transition duration-300 ease-in-out font-medium">My Account</a>
-    </nav>
-  </div>
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+   @keyframes gradient {
+       0% { background-position: 0% 50%; }
+       50% { background-position: 100% 50%; }
+       100% { background-position: 0% 50%; }
+   }
+
+   .nav-bg {
+       background: linear-gradient(to right, #0f172a, #1e1b4b, #0f172a);
+       background-size: 200% auto;
+       animation: gradient 15s linear infinite;
+   }
+
+   body {
+       font-family: 'Space Grotesk', sans-serif;
+   }
+
+   .nav-link {
+       position: relative;
+   }
+
+   .nav-link::after {
+       content: '';
+       position: absolute;
+       width: 0;
+       height: 2px;
+       bottom: -2px;
+       left: 0;
+       background: linear-gradient(to right, #a78bfa, #8b5cf6);
+       transition: width 0.3s ease;
+   }
+
+   .nav-link:hover::after {
+       width: 100%;
+   }
+</style>
+
+<header class="w-full p-6 nav-bg border-b border-gray-700/50 backdrop-blur-xl shadow-lg">
+   <div class="container mx-auto flex justify-between items-center">
+       <h1 class="text-white text-3xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
+           Purchased Plans
+       </h1>
+       
+       <nav class="flex space-x-8">
+           <a href="/" class="nav-link text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-1">
+               Home
+           </a>
+           <a href="/dashboard/" class="nav-link text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-1">
+               Pricings
+           </a>
+           <a href="/profile/" class="nav-link text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-1">
+               My Account
+           </a>
+       </nav>
+   </div>
 </header>

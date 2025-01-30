@@ -1,22 +1,77 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <title>Transaction Canceled</title>
-<body class="bg-gray-800 text-white flex items-center justify-center min-h-screen p-6 font-sans">
-    <div class="relative p-10 bg-gradient-to-br from-purple-900 to-black rounded-2xl shadow-2xl w-full max-w-md transition-all duration-300 transform hover:scale-105">
-        <h1 class="text-4xl font-extrabold text-white text-center">Transaction Canceled!</h1>
-        <p class="mt-4 text-lg text-gray-300 text-center">We regret to inform you that your transaction has been canceled.</p>
-        <div class="mt-8 flex justify-center">
-            <button type="button" class="relative inline-flex items-center justify-center px-6 py-3 text-white font-semibold bg-red-500 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none">
-                <span class="absolute inset-0 rounded-lg bg-red-700 blur-lg opacity-75"></span>
-                <a href="/orders/" class="relative">Go to Orders page</a>
-            </button>
-        </div>
-    </div>
-</body>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
+   @keyframes gradient {
+       0% { background-position: 0% 50%; }
+       50% { background-position: 100% 50%; }
+       100% { background-position: 0% 50%; }
+   }
+
+   @keyframes scale-in {
+       0% { transform: scale(0.9); opacity: 0; }
+       100% { transform: scale(1); opacity: 1; }
+   }
+
+   @keyframes slide-up {
+       0% { transform: translateY(20px); opacity: 0; }
+       100% { transform: translateY(0); opacity: 1; }
+   }
+
+   .cancel-bg {
+       background: linear-gradient(-45deg, #1a1a1a, #7f1d1d, #1e293b, #0f172a);
+       background-size: 400% 400%;
+       animation: gradient 15s ease infinite;
+   }
+
+   .scale-in {
+       animation: scale-in 0.6s ease-out forwards;
+   }
+
+   .slide-up {
+       animation: slide-up 0.8s ease-out forwards;
+   }
+
+   body {
+       font-family: 'Space Grotesk', sans-serif;
+   }
+
+   .glow {
+       box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+   }
 </style>
+
+<body class="cancel-bg text-white min-h-screen p-6 flex items-center justify-center antialiased">
+   <div class="relative w-full max-w-md scale-in">
+       <div class="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
+           <!-- Cancel Icon -->
+           <div class="flex justify-center mb-6">
+               <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-rose-500 rounded-full flex items-center justify-center glow">
+                   <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                   </svg>
+               </div>
+           </div>
+
+           <!-- Main Content -->
+           <div class="text-center mb-6 slide-up" style="animation-delay: 0.2s">
+               <h1 class="text-3xl font-bold bg-gradient-to-r from-red-400 to-rose-500 bg-clip-text text-transparent">
+                   Transaction Canceled
+               </h1>
+               <p class="mt-2 text-sm text-gray-400">We regret to inform you that your transaction has been canceled.</p>
+           </div>
+
+           <!-- Button -->
+           <div class="text-center slide-up" style="animation-delay: 0.8s">
+               <a href="/orders/" class="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-red-500 to-rose-500 rounded-lg text-white text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-500/25 focus:outline-none">
+                   <span>Return to Orders</span>
+                   <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                   </svg>
+               </a>
+           </div>
+       </div>
+   </div>
+</body>

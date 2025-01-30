@@ -3,72 +3,77 @@
 {% block content %}
 <title>Orders</title>
 <style>
-    @keyframes fadeScale {
-        0% { opacity: 0; transform: scale(0.95); }
-        100% { opacity: 1; transform: scale(1); }
-    }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
-    @keyframes glow {
-        0%, 100% { box-shadow: 0 0 5px rgba(167, 139, 250, 0.1); }
-        50% { box-shadow: 0 0 20px rgba(167, 139, 250, 0.3); }
+    @keyframes scale-in {
+        0% { transform: scale(0.9); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
     }
 
-    .card-enter {
-        animation: fadeScale 0.6s ease-out;
+    @keyframes slide-up {
+        0% { transform: translateY(20px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
     }
 
-    .float-animation {
-        animation: float 6s ease-in-out infinite;
+    .orders-bg {
+        background: linear-gradient(-45deg, #1a1a1a, #1e1b4b, #1e293b, #0f172a);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
     }
 
-    .glow-effect {
-        animation: glow 3s ease-in-out infinite;
+    body {
+        font-family: 'Space Grotesk', sans-serif;
     }
 
-    .gradient-text {
-        background: linear-gradient(90deg, #a78bfa, #ec4899);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-size: 200% auto;
-        animation: shine 4s linear infinite;
+    .scale-in {
+        animation: scale-in 0.6s ease-out forwards;
     }
 
-    @keyframes shine {
-        to {
-            background-position: 200% center;
-        }
+    .slide-up {
+        animation: slide-up 0.8s ease-out forwards;
+    }
+
+    .glow {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+    }
+
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -10px rgba(139, 92, 246, 0.3);
     }
 </style>
 
-<div class="bg-gradient-to-br from-slate-950 via-blue-950 to-gray-950 min-h-screen p-6">
+<div class="orders-bg min-h-screen p-6">
     <div class="max-w-7xl mx-auto">
-        <div class="flex justify-between items-center mb-8 float-animation">
-            <h1 class="text-4xl font-bold gradient-text">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8 slide-up">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
                 Order History
             </h1>
-            <span class="text-gray-400">Total Orders: 
-                <span class="text-purple-400 font-bold hover:text-pink-400 transition-colors duration-300">
-                    {{ orders|length }}
-                </span>
+            <span class="text-gray-400">
+                Total Orders: 
+                <span class="text-violet-400 font-bold">{{ orders|length }}</span>
             </span>
         </div>
 
         {% if orders %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for o in orders %}
-            <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
-                <div class="p-6 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 transform group-hover:scale-110 transition-transform duration-700"></div>
-                    
-                    <div class="relative">
+            <div class="scale-in card-hover" style="animation-delay: {{ forloop.counter0 }}00ms">
+                <div class="bg-gray-900/80 backdrop-blur-xl border border-gray-800/50 rounded-xl overflow-hidden">
+                    <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-2 transform group-hover:scale-105 transition-transform duration-300">
+                            <div class="flex items-center gap-2">
                                 <div class="w-3 h-3 rounded-full 
                                     {% if o.purchased_plan == 'Bronze' %}bg-amber-700
                                     {% elif o.purchased_plan == 'Silver' %}bg-gray-400
@@ -77,7 +82,7 @@
                                 </div>
                                 <span class="text-lg font-semibold text-white">{{ o.purchased_plan }}</span>
                             </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-medium transform hover:scale-105 transition-transform duration-300
+                            <span class="px-3 py-1 rounded-full text-xs font-medium
                                 {% if o.status == 'Completed' %}bg-green-500/10 text-green-400
                                 {% elif o.status == 'Pending' %}bg-yellow-500/10 text-yellow-400
                                 {% else %}bg-red-500/10 text-red-400{% endif %}">
@@ -85,36 +90,135 @@
                             </span>
                         </div>
 
-                        <div class="mb-4 transform group-hover:translate-x-2 transition-transform duration-300">
+                        <div class="mb-4">
                             <span class="text-2xl font-bold text-white">${{ o.cost }}</span>
                         </div>
 
                         <div class="mb-4">
                             <label class="text-xs text-gray-500 block mb-1">Transaction ID</label>
-                            <div class="font-mono text-sm text-gray-400 bg-gray-800/50 rounded-lg px-3 py-2 group-hover:bg-gray-800/70 transition-colors duration-300">
-                                {{ o.stripe_transaction_id|slice:":-6" }}...
+                            <div class="font-mono text-sm text-gray-400 bg-gray-800/50 rounded-lg px-3 py-2">
+                                {{ o.stripe_transaction_id|slice:":15" }}..
                             </div>
                         </div>
 
                         <div class="flex items-center gap-2 mb-4">
-                            <span class="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">{{ o.payment }}</span>
+                            <span class="text-gray-400 text-sm">{{ o.payment }}</span>
                         </div>
 
-                        <div class="text-gray-500 text-sm transform group-hover:translate-y-[-2px] transition-transform duration-300">
-                            {{ o.datetime|date:"M d, Y H:i" }}
+                        <div class="flex justify-between items-center">
+                            <div class="text-gray-500 text-sm">
+                                {{ o.datetime|date:"M d, Y H:i" }}
+                            </div>
+                            
+                            <button onclick="printTransaction('{{ o.stripe_transaction_id }}', '{{ o.purchased_plan }}', '{{ o.cost }}', '{{ o.status }}', '{{ o.payment }}', '{{ o.datetime|date:"M d, Y H:i" }}')" 
+                                class="flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 text-violet-400 rounded-lg hover:bg-violet-500/20 transition-colors duration-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                                </svg>
+                                Print
+                            </button>
                         </div>
-                        
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="card-enter bg-gray-900/70 backdrop-blur-sm border border-gray-800 rounded-xl p-12 text-center">
-            <h2 class="text-white text-2xl font-bold mb-2 gradient-text">No Orders Yet</h2>
+        <div class="bg-gray-900/80 backdrop-blur-xl border border-gray-800/50 rounded-xl p-12 text-center scale-in">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent mb-2">No Orders Yet</h2>
             <p class="text-gray-400 mb-8">Start exploring our subscription plans to begin your journey.</p>
+            <a href="/pricing" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
+                Explore Our Pricing
+            </a>
         </div>
         {% endif %}
     </div>
 </div>
+
+<script>
+function printTransaction(transactionId, plan, cost, status, payment, datetime) {
+    const printWindow = window.open('', '', 'width=600,height=600');
+    
+    const content = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Transaction Receipt - ${transactionId}</title>
+            <style>
+                body {
+                    font-family: 'Space Grotesk', sans-serif;
+                    padding: 20px;
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    padding-bottom: 20px;
+                    border-bottom: 2px solid #eee;
+                }
+                .detail-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid #eee;
+                }
+                .label {
+                    font-weight: bold;
+                    color: #666;
+                }
+                @media print {
+                    body {
+                        print-color-adjust: exact;
+                        -webkit-print-color-adjust: exact;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Transaction Receipt</h1>
+                <p>Thank you for your purchase</p>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Transaction ID:</span>
+                <span>${transactionId}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Plan:</span>
+                <span>${plan}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Amount:</span>
+                <span>$${cost}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Status:</span>
+                <span>${status}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Payment Method:</span>
+                <span>${payment}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Date:</span>
+                <span>${datetime}</span>
+            </div>
+        </body>
+        </html>
+    `;
+    
+    printWindow.document.write(content);
+    printWindow.document.close();
+    
+    printWindow.onload = function() {
+        printWindow.print();
+        printWindow.onafterprint = function() {
+            printWindow.close();
+        };
+    };
+}
+</script>
 {% endblock %}

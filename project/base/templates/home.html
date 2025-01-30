@@ -1,119 +1,108 @@
 {% load static %}
 {% block content %}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<body class="bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans">
-    <!-- Geometric Background Elements -->
-    <div class="absolute inset-0 overflow-hidden z-0">
-        <div class="absolute w-64 h-64 bg-purple-500 rounded-full opacity-10 blur-3xl top-0 left-0"></div>
-        <div class="absolute w-48 h-48 bg-blue-500 rounded-full opacity-10 blur-3xl bottom-0 right-0"></div>
+<body class="bg-black text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
+    <!-- Animated stars background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 10%; left: 20%"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 30%; left: 70%"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top: 60%; left: 40%"></div>
+        <div class="absolute w-2 h-2 bg-yellow-200 rounded-full animate-ping" style="top: 80%; left: 85%"></div>
+        <div class="absolute w-2 h-2 bg-blue-200 rounded-full animate-ping" style="top: 15%; left: 55%"></div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Planet decorations -->
+    <div class="absolute top-0 left-0 w-64 h-64 rounded-full bg-gradient-to-br from-purple-900 to-indigo-900 opacity-30 blur-xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-gradient-to-tl from-blue-900 to-cyan-900 opacity-20 blur-xl animate-pulse"></div>
+
     <div class="relative z-10 w-full max-w-6xl">
         <h1 class="text-6xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
             Choose Your Plan
         </h1>
 
-        <!-- Plans Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Bronze Plan -->
-            <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-orange transition-all duration-300 border border-gray-800 hover:border-orange-400">
-                <h3 class="text-3xl font-bold text-orange-400 mb-4">Bronze</h3>
-                <p class="text-gray-300 text-xl mb-6">$100 <span class="text-gray-400 text-sm">/ Year</span></p>
-                <ul class="text-gray-400 mb-8 space-y-2">
-                    <li> 3 Apps covered</li>
-                </ul>
-                <form id="sbf1" action="/create-checkout-session/" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="productId" value="price_1QifDaRva023ZtqtEdLJcCeM">
-                    <button class="w-full bg-gradient-to-r from-red-500 to-red-700 text-white py-3 px-6 rounded-xl hover:from-red-600 hover:to-red-800 transition-all duration-300 shadow-lg hover:shadow-neon-orange">
-                        Purchase
-                    </button>
-                </form>
+            <div class="group bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-orange transition-all duration-500 border border-gray-800 hover:border-orange-400 relative overflow-hidden transform hover:-translate-y-2 hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-orange-900/20 group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative">
+                    <h3 class="text-3xl font-bold text-orange-400 mb-4 group-hover:scale-105 transition-transform duration-500">Bronze</h3>
+                    <p class="text-gray-300 text-xl mb-6">$100 <span class="text-gray-400 text-sm">/ Year</span></p>
+                    <ul class="text-gray-400 mb-8 space-y-2">
+                        <li>3 Apps covered</li>
+                    </ul>
+                    <form id="sbf1" action="/create-checkout-session/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="productId" value="price_1QifDaRva023ZtqtEdLJcCeM">
+                        <button class="w-full bg-gradient-to-r from-red-500 to-red-700 text-white py-3 px-6 rounded-xl hover:from-red-600 hover:to-red-800 transition-all duration-300 shadow-lg hover:shadow-neon-orange transform group-hover:scale-105">
+                            Purchase
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <!-- Silver Plan -->
-            <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-blue transition-all duration-300 border border-gray-800 hover:border-blue-400">
-                <h3 class="text-3xl font-bold text-blue-400 mb-4">Silver</h3>
-                <p class="text-gray-300 text-xl mb-6">$250 <span class="text-gray-400 text-sm">/ Year</span></p>
-                <ul class="text-gray-400 mb-8 space-y-2">
-                    <li> 9 Apps covered</li>
-                </ul>
-                <form id="sbf2" action="/create-checkout-session/" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="productId" value="price_1QifEDRva023ZtqtD6RKX69j">
-                    <button class="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-xl hover:from-blue-500 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-neon-blue">
-                        Purchase
-                    </button>
-                </form>
+            <div class="group bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-blue transition-all duration-500 border border-gray-800 hover:border-blue-400 relative overflow-hidden transform hover:-translate-y-2 hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/20 group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-4 group-hover:scale-105 transition-transform duration-500">Silver</h3>
+                    <p class="text-gray-300 text-xl mb-6">$250 <span class="text-gray-400 text-sm">/ Year</span></p>
+                    <ul class="text-gray-400 mb-8 space-y-2">
+                        <li>9 Apps covered</li>
+                    </ul>
+                    <form id="sbf2" action="/create-checkout-session/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="productId" value="price_1QifEDRva023ZtqtD6RKX69j">
+                        <button class="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-xl hover:from-blue-500 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-neon-blue transform group-hover:scale-105">
+                            Purchase
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <!-- Gold Plan -->
-            <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-purple transition-all duration-300 border border-gray-800 hover:border-purple-400">
-                <h3 class="text-3xl font-bold text-purple-400 mb-4">Gold</h3>
-                <p class="text-gray-300 text-xl mb-6">$300 <span class="text-gray-400 text-sm">/ Year</span></p>
-                <ul class="text-gray-400 mb-8 space-y-2">
-                    <li> 12 Apps covered</li>
-                </ul>
-                <form id="sbf3" action="/create-checkout-session/" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="productId" value="price_1QifEsRva023ZtqtQZ7tb7vs">
-                    <button class="w-full bg-gradient-to-r from-purple-400 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-purple-500 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-neon-purple">
-                        Purchase
-                    </button>
-                </form>
+            <div class="group bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-purple transition-all duration-500 border border-gray-800 hover:border-purple-400 relative overflow-hidden transform hover:-translate-y-2 hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/20 group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative">
+                    <h3 class="text-3xl font-bold text-purple-400 mb-4 group-hover:scale-105 transition-transform duration-500">Gold</h3>
+                    <p class="text-gray-300 text-xl mb-6">$300 <span class="text-gray-400 text-sm">/ Year</span></p>
+                    <ul class="text-gray-400 mb-8 space-y-2">
+                        <li>12 Apps covered</li>
+                    </ul>
+                    <form id="sbf3" action="/create-checkout-session/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="productId" value="price_1QifEsRva023ZtqtQZ7tb7vs">
+                        <button class="w-full bg-gradient-to-r from-purple-400 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-purple-500 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-neon-purple transform group-hover:scale-105">
+                            Purchase
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <!-- Platinum Plan -->
-            <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-pink transition-all duration-300 border border-gray-800 hover:border-pink-400">
-                <h3 class="text-3xl font-bold text-pink-400 mb-4">Platinum</h3>
-                <p class="text-gray-300 text-xl mb-6">$330 <span class="text-gray-400 text-sm">/ Year</span></p>
-                <ul class="text-gray-400 mb-8 space-y-2">
-                    <li> 15 Apps covered</li>
-                </ul>
-                <form id="sbf4" action="/create-checkout-session/" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="productId" value="price_1QifFORva023Ztqtzdl88sfa">
-                    <button class="w-full bg-gradient-to-r from-pink-400 to-pink-600 text-white py-3 px-6 rounded-xl hover:from-pink-500 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-neon-pink">
-                        Purchase
-                    </button>
-                </form>
+            <div class="group bg-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-neon-pink transition-all duration-500 border border-gray-800 hover:border-pink-400 relative overflow-hidden transform hover:-translate-y-2 hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-pink-900/20 group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative">
+                    <h3 class="text-3xl font-bold text-pink-400 mb-4 group-hover:scale-105 transition-transform duration-500">Platinum</h3>
+                    <p class="text-gray-300 text-xl mb-6">$330 <span class="text-gray-400 text-sm">/ Year</span></p>
+                    <ul class="text-gray-400 mb-8 space-y-2">
+                        <li>15 Apps covered</li>
+                    </ul>
+                    <form id="sbf4" action="/create-checkout-session/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="productId" value="price_1QifFORva023Ztqtzdl88sfa">
+                        <button class="w-full bg-gradient-to-r from-pink-400 to-pink-600 text-white py-3 px-6 rounded-xl hover:from-pink-500 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-neon-pink transform group-hover:scale-105">
+                            Purchase
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <!-- Skip Link -->
         <p class="mt-12 text-gray-400 text-center">
             <a class="text-blue-400 hover:text-blue-300 transition duration-300 font-semibold" href="/orders/">
                 Skip for now →
             </a>
         </p>
     </div>
-    <style>
-      @keyframes glow {
-        0% { box-shadow: 0 0 10px rgba(255, 99, 71, 0.5); }
-        50% { box-shadow: 0 0 20px rgba(255, 99, 71, 0.8); }
-        100% { box-shadow: 0 0 10px rgba(255, 99, 71, 0.5); }
-    }
-    
-    .hover\:shadow-neon-orange:hover {
-        animation: glow 1.5s infinite;
-        box-shadow: 0 0 15px rgba(255, 99, 71, 0.7);
-    }
-    
-    .hover\:shadow-neon-blue:hover {
-        animation: glow 1.5s infinite;
-        box-shadow: 0 0 15px rgba(0, 191, 255, 0.7);
-    }
-    
-    .hover\:shadow-neon-purple:hover {
-        animation: glow 1.5s infinite;
-        box-shadow: 0 0 15px rgba(147, 112, 219, 0.7);
-    }
-    
-    .hover\:shadow-neon-pink:hover {
-        animation: glow 1.5s infinite;
-        box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-    }
-    </style>
 </body>
 {% endblock %}
