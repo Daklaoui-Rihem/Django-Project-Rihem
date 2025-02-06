@@ -16,43 +16,45 @@ stripe.api_key=settings.STRIPE_SECRET_KEY
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'POST':
-        product_id = request.POST.get('productId')
-        user = request.user
+        try:
+            product_id = request.POST.get('productId')
+            user = request.user
 
-        price = stripe.Price.retrieve(product_id)
-        product_id_from_price = price.get('product')
-        product = stripe.Product.retrieve(product_id_from_price)
+            price = stripe.Price.retrieve(product_id)
+            product_id_from_price = price.get('product')
+            product = stripe.Product.retrieve(product_id_from_price)
 
-        plan_name = product.get('name', 'Unknown Plan')
+            plan_name = product.get('name', 'Unknown Plan')
+            plan_price = price['unit_amount'] / 100
 
-        plan_price = price['unit_amount'] / 100
+            unique_django_id = str(uuid.uuid4())
 
-        unique_django_id = str(uuid.uuid4())
+            session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price': product_id,
+                    'quantity': 1,
+                }],
+                mode='subscription',
+                billing_address_collection='required',
+                success_url='http://127.0.0.1:8000/success',
+                cancel_url='http://127.0.0.1:8000/cancel',
+            )
 
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[{
-                'price': product_id,
-                'quantity': 1,
-            }],
-            mode='subscription',
-            billing_address_collection='required',
-            success_url='http://127.0.0.1:8000/success',
-            cancel_url='http://127.0.0.1:8000/cancel',
-        )
+            Subscription.objects.create(
+                user=user,
+                django_id=unique_django_id,
+                stripe_transaction_id=session.id,
+                list_of_items={"product_id": product_id},
+                status='Pending',
+                cost=plan_price,
+                purchased_plan=plan_name,
+                payment='Credit Card',
+            )
 
-        Subscription.objects.create(
-            user=user,
-            django_id=unique_django_id,
-            stripe_transaction_id=session.id,
-            list_of_items={"product_id": product_id},
-            status='Pending',
-            cost=plan_price,
-            purchased_plan=plan_name,
-            payment='Credit Card',
-        )
-
-        return redirect(session.url)
+            return redirect(session.url)
+        except stripe.error.StripeError as e:
+            return render(request, 'error.html', {'error': str(e)})
     
     return render(request, 'cancel.html')
 
